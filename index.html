@@ -55,6 +55,7 @@
             document.querySelector('.signup form').addEventListener('submit', register);
             document.querySelector('.login form').addEventListener('submit', login);
         }
+  </script>
     </script>
 </head>
 <body>
@@ -81,10 +82,15 @@
                 <input type="text" name="username" placeholder="Email or User name" required="">
                 <input type="password" name="password" placeholder="password" required="">
                 <button type="submit">Login</button>
-                <p>Don't have an account? <a href="javascript:void(0);" onclick="location.reload();">Create account</a>.</p>
+                <p>Don't have an account? <a href="#" onclick="window.location.reload();">Create account</a>.</p>
             </form>
         </div>
     </div>
+</div>
+<div class="info">
+    <h3>Login not working <a href="javascript:void(0);" onclick="location.reload();">Refresh Page</a> here. Or go to our communications server and recieve support. <a href="https://discordapp.com/channels/1191046056708935820/1191046057686208619" target="_blank">Communications Server.</a></h3>
+</div>
+
     <script>
         main();
     </script>
