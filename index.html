@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup and Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function loadUsers() {
+            try {
+                var users = localStorage.getItem('users');
+                return JSON.parse(users) || {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function login(event) {
+            event.preventDefault();
+            var users = loadUsers();
+
+            var username = event.target.username.value;
+            var password = event.target.password.value;
+
+            if (username in users && users[username]["password"] === password) {
+                window.location.href = "home.html"; // Replace with your HTML file name or path
+            } else {
+                alert("Invalid username or password.");
+            }
+}
+
+
+        function register(event) {
+            event.preventDefault();
+            var users = loadUsers();
+
+            var username = event.target.username.value;
+            if (username in users) {
+                alert("Username already exists. Please choose another one.");
+                return;
+            }
+
+            var password = event.target.password.value;
+
+            users[username] = { "password": password };
+            saveUsers(users);
+            alert("Registration successful!");
+        }
+
+        function main() {
+            document.querySelector('.signup form').addEventListener('submit', register);
+            document.querySelector('.login form').addEventListener('submit', login);
+        }
+    </script>
+</head>
+<body>
+
+    <h1 class="title">River City</h1>
+    <h1 class="subtitle">Roleplay</h1>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="username" placeholder="User name" required="">
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="password" placeholder="password" required="">
+                <input type="password" name="confirm_password" placeholder="Confirm password" required="">
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+
+        <div class="login">
+            <form> <!-- Updated form tags -->
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="text" name="username" placeholder="Email or User name" required="">
+                <input type="password" name="password" placeholder="password" required="">
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="#">Create account</a>.</p>
+            </form>
+        </div>
+    </div>
+    <script>
+        main();
+    </script>
+</body>
+</html>
